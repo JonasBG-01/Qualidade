@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d0d0f">
-  <meta name="description" content="Quality Gate — pesquisa compartilhada de imagens por código.">
+  <meta name="description" content="Quality Gate — catálogo de imagens pesquisável por código.">
   <title>Quality Gate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,45 +12,23 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="/" aria-label="Quality Gate — início">
-      <span class="brand-mark" aria-hidden="true"><span>Q</span><i></i></span>
-      <span class="brand-name">QUALITY <span>GATE</span></span>
-    </a>
-    <div class="topbar-right"><span class="status-dot"></span><span>Acervo compartilhado</span></div>
+    <a class="brand" href="/" aria-label="Quality Gate — início"><span class="brand-mark" aria-hidden="true"><span>Q</span><i></i></span><span class="brand-name">QUALITY <span>GATE</span></span></a>
+    <span class="catalog-status"><i></i>CATÁLOGO DE IMAGENS</span>
   </header>
   <main class="app-shell">
-    <nav class="tabs" role="tablist" aria-label="Navegação">
-      <button class="tab" id="tab-search" type="button" role="tab" aria-selected="true" aria-controls="panel-search"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>Pesquisar</button>
-      <button class="tab" id="tab-upload" type="button" role="tab" aria-selected="false" aria-controls="panel-upload" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5"/><path d="M20 16.5v2A2.5 2.5 0 0 1 17.5 21h-11A2.5 2.5 0 0 1 4 18.5v-2"/></svg>Adicionar imagens</button>
-    </nav>
-
-    <section class="panel search-panel" id="panel-search" role="tabpanel" aria-labelledby="tab-search">
-      <div class="search-heading"><span class="section-kicker">ACERVO DE IMAGENS</span><h1>Pesquisar imagens</h1><p>Digite o código ou o nome do arquivo para localizar uma imagem.</p></div>
-      <form class="search-form" id="search-form">
-        <label class="sr-only" for="search-input">Código ou nome da imagem</label>
-        <div class="search-input-wrap"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="search-input" type="search" placeholder="Ex.: QG-2048" autocomplete="off" spellcheck="false"><button class="search-submit" type="submit">Pesquisar <span aria-hidden="true">↗</span></button></div>
+    <section class="catalog" aria-labelledby="page-title">
+      <div class="page-heading"><div><span class="section-kicker">QUALITY GATE · ACERVO</span><h1 id="page-title">Catálogo de imagens</h1><p>Pesquise pelo código ou nome do arquivo.</p></div><div class="count-badge"><span id="library-count">Carregando…</span></div></div>
+      <form class="search-form" id="search-form" role="search">
+        <label class="sr-only" for="search-input">Buscar imagens pelo código ou nome</label>
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
+        <input id="search-input" type="search" placeholder="Digite um código para filtrar…" autocomplete="off" spellcheck="false">
+        <button type="button" class="clear-button" id="clear-search" aria-label="Limpar pesquisa" hidden>×</button>
       </form>
-      <div class="search-meta"><span id="result-caption">Digite um código para pesquisar</span><span class="library-count"><span class="count-dot"></span><span id="library-count">Carregando acervo…</span></span></div>
+      <div class="results-toolbar"><span id="result-caption">Todas as imagens</span><span class="results-hint">Selecione uma imagem para ampliar</span></div>
       <div class="results" id="results" aria-live="polite"></div>
     </section>
-
-    <section class="panel upload-panel" id="panel-upload" role="tabpanel" aria-labelledby="tab-upload" hidden>
-      <div class="upload-heading"><span class="section-kicker">GESTÃO DO ACERVO</span><h1>Adicionar imagens</h1><p>Selecione uma pasta para enviar imagens ao acervo compartilhado.</p></div>
-      <div class="upload-card">
-        <div class="dropzone" id="dropzone" tabindex="0">
-          <span class="upload-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5"/><path d="M20 16.5v2A2.5 2.5 0 0 1 17.5 21h-11A2.5 2.5 0 0 1 4 18.5v-2"/></svg></span>
-          <strong>Arraste imagens ou selecione uma pasta</strong><span>PNG, JPG, WEBP, GIF, AVIF ou HEIC · até 20 MB por imagem</span>
-          <button class="button-secondary" id="choose-folder" type="button">Selecionar pasta</button>
-          <input class="sr-only" id="folder-input" type="file" accept="image/*" multiple webkitdirectory directory>
-        </div>
-        <div class="selected-files" id="selected-files" hidden><div class="selected-header"><strong id="selected-count"></strong><button class="text-button" id="clear-selection" type="button">Limpar</button></div><div class="file-list" id="file-list"></div></div>
-        <div class="upload-footer"><span class="privacy-note"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg>Imagens disponíveis para todos os usuários.</span><button class="search-submit upload-submit" id="upload-button" type="button" disabled>Enviar imagens <span aria-hidden="true">↗</span></button></div>
-        <p class="upload-error" id="upload-error" role="alert" hidden></p>
-      </div>
-    </section>
   </main>
-  <footer class="footer"><span>QUALITY GATE</span><span>ACERVO CENTRALIZADO · ACESSO COMPARTILHADO</span></footer>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <footer class="footer"><span>QUALITY GATE</span><span>CATÁLOGO VERSIONADO NO REPOSITÓRIO</span></footer>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

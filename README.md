@@ -1,12 +1,16 @@
 # Quality Gate
 
-Aplicação web para pesquisar e adicionar imagens em um acervo compartilhado.
+Catálogo de miniaturas pesquisável, com imagens mantidas no próprio repositório (não usa Vercel Blob).
 
-## Configuração da Vercel
+## Adicionar imagens
 
-1. Importe o repositório como projeto Vite.
-2. Crie e conecte um Vercel Blob Store ao projeto.
-3. A integração fornece `BLOB_READ_WRITE_TOKEN` automaticamente.
-4. O build é `npm run build` e a saída é `dist`.
+Envie os arquivos diretamente para `public/imagens/` no GitHub. O nome de cada arquivo sem a extensão será o código pesquisável. Por exemplo, `QG-2048.jpg` poderá ser encontrado por `QG-2048`.
 
-Não existe senha de envio nesta versão. Qualquer pessoa com acesso ao app pode enviar arquivos para o acervo compartilhado.
+Formatos suportados: JPG/JPEG, PNG, GIF, WEBP, AVIF, BMP, TIFF e SVG. Os arquivos ficam públicos como o restante deste repositório. A Vercel gera o catálogo automaticamente durante cada build; após adicionar imagens, aguarde o novo deploy.
+
+## Build
+
+```sh
+npm install
+npm run build
+```
