@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101012">
+  <meta name="theme-color" content="#0d0d0f">
   <meta name="description" content="Quality Gate — pesquisa compartilhada de imagens por código.">
   <title>Quality Gate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
   <header class="topbar">
     <a class="brand" href="/" aria-label="Quality Gate — início">
       <span class="brand-mark" aria-hidden="true"><span>Q</span><i></i></span>
-      <span class="brand-name">QUALITY<span> GATE</span></span>
+      <span class="brand-name">QUALITY <span>GATE</span></span>
     </a>
     <div class="topbar-right"><span class="status-dot"></span><span>Acervo compartilhado</span></div>
   </header>
@@ -35,10 +35,8 @@
     </section>
 
     <section class="panel upload-panel" id="panel-upload" role="tabpanel" aria-labelledby="tab-upload" hidden>
-      <div class="upload-heading"><span class="section-kicker">GESTÃO DO ACERVO</span><h1>Adicionar imagens</h1><p>Envie uma pasta para disponibilizar as imagens na pesquisa para todos os usuários.</p></div>
+      <div class="upload-heading"><span class="section-kicker">GESTÃO DO ACERVO</span><h1>Adicionar imagens</h1><p>Selecione uma pasta para enviar imagens ao acervo compartilhado.</p></div>
       <div class="upload-card">
-        <label class="field-label" for="upload-password">Senha de administrador</label>
-        <input class="password-input" id="upload-password" type="password" autocomplete="current-password" placeholder="Informe a senha de envio">
         <div class="dropzone" id="dropzone" tabindex="0">
           <span class="upload-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5 5 5"/><path d="M20 16.5v2A2.5 2.5 0 0 1 17.5 21h-11A2.5 2.5 0 0 1 4 18.5v-2"/></svg></span>
           <strong>Arraste imagens ou selecione uma pasta</strong><span>PNG, JPG, WEBP, GIF, AVIF ou HEIC · até 20 MB por imagem</span>
@@ -46,7 +44,7 @@
           <input class="sr-only" id="folder-input" type="file" accept="image/*" multiple webkitdirectory directory>
         </div>
         <div class="selected-files" id="selected-files" hidden><div class="selected-header"><strong id="selected-count"></strong><button class="text-button" id="clear-selection" type="button">Limpar</button></div><div class="file-list" id="file-list"></div></div>
-        <div class="upload-footer"><span class="privacy-note"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg>Imagens armazenadas no acervo compartilhado.</span><button class="search-submit upload-submit" id="upload-button" type="button" disabled>Enviar imagens <span aria-hidden="true">↗</span></button></div>
+        <div class="upload-footer"><span class="privacy-note"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg>Imagens disponíveis para todos os usuários.</span><button class="search-submit upload-submit" id="upload-button" type="button" disabled>Enviar imagens <span aria-hidden="true">↗</span></button></div>
         <p class="upload-error" id="upload-error" role="alert" hidden></p>
       </div>
     </section>

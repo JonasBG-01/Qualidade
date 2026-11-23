@@ -46,12 +46,9 @@ async function loadImages() {
     const data = await response.json();
     state.images = Array.isArray(data.images) ? data.images : [];
     updateLibraryCount();
-    return true;
   } catch (error) {
     console.error(error);
     $('library-count').textContent = 'Acervo indisponível';
-    $('results').innerHTML = '<div class="empty-state"><span class="empty-symbol">!</span><strong>Não foi possível acessar o acervo</strong><p>Verifique a configuração do armazenamento na Vercel e tente novamente.</p></div>';
-    return false;
   }
 }
 
@@ -63,12 +60,10 @@ function createImageCard(image) {
   preview.href = image.url;
   preview.target = '_blank';
   preview.rel = 'noopener noreferrer';
-  preview.setAttribute('aria-label', `Abrir imagem ${image.name || image.code}`);
   const img = document.createElement('img');
   img.src = image.url;
   img.alt = `Imagem ${image.code}`;
   img.loading = 'lazy';
-  img.onerror = () => { img.alt = 'Não foi possível carregar esta imagem'; };
   preview.append(img);
   const info = document.createElement('div');
   info.className = 'image-info';
@@ -136,7 +131,6 @@ function setFiles(fileList) {
     const item = document.createElement('span');
     item.className = 'file-chip';
     item.textContent = file.webkitRelativePath || file.name;
-    item.title = file.name;
     list.append(item);
   });
   if (state.files.length > 40) {
@@ -164,13 +158,6 @@ dropzone.addEventListener('drop', (event) => setFiles(event.dataTransfer.files))
 dropzone.addEventListener('keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); folderInput.click(); } });
 
 $('upload-button').addEventListener('click', async (event) => {
-  const password = $('upload-password').value;
-  if (!password) {
-    $('upload-error').textContent = 'Informe a senha de administrador para enviar imagens.';
-    $('upload-error').hidden = false;
-    $('upload-password').focus();
-    return;
-  }
   if (!state.files.length) return;
   const button = event.currentTarget;
   const files = [...state.files];
@@ -187,7 +174,6 @@ $('upload-button').addEventListener('click', async (event) => {
       await upload(pathname, file, {
         access: 'public',
         handleUploadUrl: '/api/upload',
-        clientPayload: JSON.stringify({ password }),
         contentType: file.type || 'application/octet-stream',
       });
       uploaded += 1;
@@ -195,18 +181,13 @@ $('upload-button').addEventListener('click', async (event) => {
     state.files = [];
     folderInput.value = '';
     $('selected-files').hidden = true;
-    $('upload-password').value = '';
     await loadImages();
     showToast(`${uploaded} ${uploaded === 1 ? 'imagem enviada' : 'imagens enviadas'} para o acervo compartilhado.`);
     setTab('search');
-    $('search-input').value = '';
-    $('result-caption').textContent = 'Digite um código para pesquisar';
-    $('results').replaceChildren();
   } catch (error) {
     console.error(error);
-    $('upload-error').textContent = error.message || 'Falha ao enviar. Confira a senha e a configuração do Blob na Vercel.';
+    $('upload-error').textContent = error.message || 'Falha ao enviar. Confira a configuração do Blob na Vercel.';
     $('upload-error').hidden = false;
-    showToast('O envio não foi concluído.');
   } finally {
     button.disabled = state.files.length === 0;
     button.innerHTML = 'Enviar imagens <span aria-hidden="true">↗</span>';
