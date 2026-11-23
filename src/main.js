@@ -214,11 +214,3 @@ $('upload-button').addEventListener('click', async (event) => {
 });
 
 loadImages();
-
-function showToast(message) {
-  const toast = $('toast');
-  toast.textContent = message;
-  toast.classList.add('visible');
-  clearTimeout(state.toastTimer);
-  state.toastTimer = setTimeout(() => toast.classList.remove('visible'), 3200);
-}
