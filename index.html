@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d0d0f">
-  <meta name="description" content="Quality Gate — catálogo de imagens pesquisável por código.">
+  <meta name="description" content="Quality Gate — catálogo de imagens por código.">
   <title>Quality Gate</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,23 +12,27 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="/" aria-label="Quality Gate — início"><span class="brand-mark" aria-hidden="true"><span>Q</span><i></i></span><span class="brand-name">QUALITY <span>GATE</span></span></a>
-    <span class="catalog-status"><i></i>CATÁLOGO DE IMAGENS</span>
+    <a class="brand" href="/" aria-label="Quality Gate — início"><span class="brand-mark"><span>Q</span><i></i></span><span class="brand-name">QUALITY <span>GATE</span></span></a>
+    <button class="import-zip" id="import-zip" type="button">Importar ZIP</button>
+    <input id="zip-input" class="sr-only" type="file" accept=".zip,application/zip" aria-label="Arquivo ZIP com imagens">
   </header>
+
   <main class="app-shell">
-    <section class="catalog" aria-labelledby="page-title">
-      <div class="page-heading"><div><span class="section-kicker">QUALITY GATE · ACERVO</span><h1 id="page-title">Catálogo de imagens</h1><p>Pesquise pelo código ou nome do arquivo.</p></div><div class="count-badge"><span id="library-count">Carregando…</span></div></div>
+    <section class="catalog">
+      <div class="page-heading"><div><span class="section-kicker">QUALITY GATE · ACERVO</span><h1>Catálogo de imagens</h1><p>Importe um ZIP e pesquise pelo código ou nome do arquivo.</p></div><div class="count-badge" id="library-count">Carregando…</div></div>
       <form class="search-form" id="search-form" role="search">
-        <label class="sr-only" for="search-input">Buscar imagens pelo código ou nome</label>
+        <label class="sr-only" for="search-input">Buscar pelo código</label>
         <svg class="search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
-        <input id="search-input" type="search" placeholder="Digite um código para filtrar…" autocomplete="off" spellcheck="false">
+        <input id="search-input" type="search" placeholder="Digite um código para pesquisar…" autocomplete="off" spellcheck="false">
         <button type="button" class="clear-button" id="clear-search" aria-label="Limpar pesquisa" hidden>×</button>
       </form>
-      <div class="results-toolbar"><span id="result-caption">Todas as imagens</span><span class="results-hint">Selecione uma imagem para ampliar</span></div>
+      <div class="results-toolbar"><span id="result-caption">Todas as imagens</span><span class="results-hint" id="import-status">ZIP não importado</span></div>
       <div class="results" id="results" aria-live="polite"></div>
     </section>
   </main>
-  <footer class="footer"><span>QUALITY GATE</span><span>CATÁLOGO VERSIONADO NO REPOSITÓRIO</span></footer>
+
+  <footer class="footer"><span>QUALITY GATE</span><span>CATÁLOGO LOCAL · ARQUIVO ZIP</span></footer>
+  <div class="toast" id="toast" role="status"></div>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

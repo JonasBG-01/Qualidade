@@ -1,16 +1,11 @@
 # Quality Gate
 
-Catálogo de miniaturas pesquisável, com imagens mantidas no próprio repositório (não usa Vercel Blob).
+## Importar imagens por ZIP
 
-## Adicionar imagens
+Na tela principal, use **Importar ZIP**. Selecione um arquivo `.zip` contendo imagens. O app extrai os arquivos no navegador e usa o nome de cada arquivo sem extensão como código.
 
-Envie os arquivos diretamente para `public/imagens/` no GitHub. O nome de cada arquivo sem a extensão será o código pesquisável. Por exemplo, `QG-2048.jpg` poderá ser encontrado por `QG-2048`.
+Exemplo:
+- `QG-2048.jpg` → código `QG-2048`
+- `lote_15.png` → código `lote_15`
 
-Formatos suportados: JPG/JPEG, PNG, GIF, WEBP, AVIF, BMP, TIFF e SVG. Os arquivos ficam públicos como o restante deste repositório. A Vercel gera o catálogo automaticamente durante cada build; após adicionar imagens, aguarde o novo deploy.
-
-## Build
-
-```sh
-npm install
-npm run build
-```
+A importação fica salva no IndexedDB deste navegador. Para atualizar o catálogo, importe um novo ZIP. Este catálogo não depende de Vercel Blob.
